@@ -1,0 +1,59 @@
+:root {
+  --bg: #c9cac6;          /* gris neutro 18 % de los fotómetros */
+  --surface: #e7e7e3;
+  --ink: #1d1f1e;
+  --muted: #5a5d5a;
+  --stage: #232524;
+  --safelight: #c4321f;   /* luz de seguridad del cuarto oscuro */
+  --line: #a9aaa5;
+  --radius: 4px;
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 var(--font-ui); }
+
+.topbar { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; justify-content: space-between; padding: .75rem 1.25rem; background: var(--stage); color: var(--bg); }
+.topbar h1 { margin: 0; font: 600 1.6rem var(--font-display); letter-spacing: .01em; }
+.badges { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.badge { padding: .2rem .6rem; border: 1px solid #6b6e6b; border-radius: 999px; font-size: .8rem; font-variant-numeric: tabular-nums; }
+.badge.warn { border-color: var(--safelight); color: #ffb3a6; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 21rem; gap: 1rem; padding: 1rem 1.25rem; }
+.stage { display: grid; gap: .75rem; align-content: start; }
+.canvas-wrap { position: relative; display: grid; place-items: center; min-height: 22rem; background: var(--stage); border-radius: var(--radius); overflow: hidden; }
+canvas { display: block; max-width: 100%; max-height: 70vh; width: auto; height: auto; }
+#empty-hint { position: absolute; margin: 0; padding: 0 1rem; color: var(--bg); text-align: center; }
+.canvas-wrap.has-image #empty-hint { display: none; }
+
+.progress-row, .liveness { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; padding: .6rem .75rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+progress { flex: 1 1 12rem; height: .9rem; accent-color: var(--safelight); }
+#progress-label { min-width: 13rem; font-variant-numeric: tabular-nums; }
+.track { position: relative; flex: 0 0 8rem; height: 1.2rem; border-bottom: 2px solid var(--line); }
+.dot { position: absolute; left: 0; top: 0; width: 1rem; height: 1rem; border-radius: 50%; background: var(--safelight); will-change: transform; }
+#live-input { flex: 1 1 12rem; }
+
+.panel { display: grid; gap: .75rem; align-content: start; }
+fieldset { display: grid; gap: .6rem; margin: 0; padding: .75rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+legend { padding: 0 .35rem; font: 600 1rem var(--font-display); }
+label { display: grid; gap: .2rem; font-size: .9rem; }
+label output { float: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+label.check { display: flex; gap: .5rem; align-items: center; }
+.row { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+button, select, input[type="text"] { font: inherit; padding: .45rem .7rem; color: var(--ink); background: #f4f4f1; border: 1px solid var(--ink); border-radius: var(--radius); }
+button { cursor: pointer; }
+button:hover:not(:disabled) { background: #fff; }
+button.primary { color: #fff; background: var(--ink); }
+button.primary:hover:not(:disabled) { background: #000; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+:focus-visible { outline: 3px solid var(--safelight); outline-offset: 2px; }
+input[type="range"] { accent-color: var(--ink); }
+
+.metrics { display: grid; grid-template-columns: auto 1fr; gap: .2rem .75rem; margin: 0; padding: .75rem; background: var(--stage); color: var(--bg); border-radius: var(--radius); font-variant-numeric: tabular-nums; }
+.metrics dt { color: #9c9f9b; } .metrics dd { margin: 0; text-align: right; }
+
+#log { max-height: 9rem; margin: 0 1.25rem 1.25rem; padding: .6rem .75rem .6rem 2rem; overflow: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font: .8rem/1.5 ui-monospace, Menlo, Consolas, monospace; }
+
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
